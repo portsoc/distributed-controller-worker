@@ -1,0 +1,21 @@
+{
+  "name": "clocoss-master-worker",
+  "version": "0.1.0",
+  "description": "a simple master-worker distributed computation example",
+  "author": "Jacek Kopecky <jacek@jacek.cz>",
+  "license": "ISC",
+  "scripts": {
+    "server": "node server.js",
+    "client": "node client.js"
+  },
+  "devDependencies": {
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.0.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
