@@ -48,6 +48,8 @@ function status() {
   process.stdout.write(`${done.length}/${JOBCOUNT} done          \r`);
 }
 
+let startTime = null;
+
 function getJob(req, res) {
   if (jobs.length === 0) {
     // no more jobs to do
@@ -57,6 +59,7 @@ function getJob(req, res) {
     const job = jobs.shift();
     res.json(job);
     jobs.push(job);
+    if (startTime == null) startTime = Date.now();
   }
 }
 
@@ -89,7 +92,8 @@ function finished() {
   for (const job of done) {
     sum += job.result.sumsqrt;
   }
-  console.log(`\nFinished: the sum of square roots of 0..${JOBCOUNT}*${JOBSIZE}-1 is ${sum}`);
+  const time = Date.now() - startTime;
+  console.log(`\nFinished: the sum of square roots of 0..${JOBCOUNT}*${JOBSIZE}-1 is ${sum} (took ${time}ms)`);
   process.exit(0);
 }
 

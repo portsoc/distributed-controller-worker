@@ -19,6 +19,9 @@ const resultUrl = `http://${serverIP}/result?key=${secretKey}`;
 
 const fetch = require('node-fetch');
 
+const startTime = Date.now();
+let doneCount = 0;
+
 async function getFirstJob() {
   let job = await fetch(jobUrl);
   if (!job.ok) throw new Error(`cannot fetch: ${job.status} ${job.statusText}`);
@@ -38,16 +41,17 @@ async function doJob(job) {
 const headers = { 'content-type': 'application/json' };
 
 async function sendResult(result) {
-  console.log('sending result', result);
+  // console.log('sending result', result);
+  doneCount += 1;
   try {
     let job = await fetch(resultUrl, { method: 'POST', body: JSON.stringify(result), headers });
-    if (job.status === 204) return console.log('no more jobs, done');
+    if (job.status === 204) return finish('no more jobs, done');
     if (!job.ok) throw new Error(`cannot post: ${job.status} ${job.statusText}`);
     job = await job.json();
     return doJob(job);
   } catch (e) {
     if (e.code === 'ECONNREFUSED') {
-      return console.log('server unreachable, presumed finished');
+      return finish('server unreachable, presumed finished');
     }
 
     throw e;
@@ -64,12 +68,18 @@ function doSumSqrt(job) {
     throw new Error('invalid job', job);
   }
   console.log('job', job);
-  console.time('job');
+  // console.time('job');
   let sumsqrt = 0;
   const end = job.start + job.count;
   for (let i=job.start; i<end; i+=1) {
     sumsqrt += Math.sqrt(i);
   }
-  console.timeEnd('job');
+  // console.timeEnd('job');
   return { id: job.id, sumsqrt };
+}
+
+function finish(msg) {
+  console.log(msg);
+  const time = Date.now() - startTime;
+  console.log(`done ${doneCount} jobs in ${time}ms (${time/doneCount}ms per job).`);
 }
