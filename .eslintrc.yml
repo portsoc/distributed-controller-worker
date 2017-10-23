@@ -1,10 +1,13 @@
 extends: airbnb
-plugins:
-  - react
+#plugins:
+#  - react
 
 env:
   node: true
   browser: false
+
+parserOptions:
+  ecmaVersion: 8
 
 rules:
   no-console: off
@@ -23,3 +26,4 @@ rules:
     - 120
     - ignoreTrailingComments: true
   space-infix-ops: off
+  no-restricted-syntax: off
