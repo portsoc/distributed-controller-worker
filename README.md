@@ -17,10 +17,10 @@ To run the server, use the command below, but replace the parameter `KEY` below 
 npm run server KEY
 ```
 
-To run a client, use the command below, providing the randomly generated string and the IP address of the server:
+To run a client, use the command below, providing the randomly generated string and the IP address (and optionally the port) of the server:
 
 ```
-npm run client SERVER-KEY SERVER-IP-ADDRESS
+npm run client SERVER-KEY SERVER-IP-ADDRESS[:PORT]
 ```
 
 

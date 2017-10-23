@@ -8,22 +8,30 @@ if (secretKey.length < 6) {
 }
 
 const express = require('express');
+
 const app = express();
 
 // check that every request has the ?key= parameter
-app.use((req, res, next) => {
+app.use(checkSecretKey);
+
+// get the next job from the queue
+// given jobs go to the back of the queue in case the worker is slow or dies
+app.get('/job', getJob);
+app.post('/result', express.json(), postResult);
+
+function checkSecretKey(req, res, next) {
   if (req.query.key !== secretKey) {
     res.sendStatus(403);
     console.warn(`${new Date().toISOString()} access attempt with the wrong key: '${req.query.key}'`);
   } else {
     next();
   }
-});
+}
 
 const jobs = [];
 const done = [];
 
-const JOBSIZE = 1e8;
+const JOBSIZE = 2e8;
 const JOBCOUNT = 100;
 
 // generate jobs
@@ -35,11 +43,6 @@ for (let i=0; i<JOBCOUNT; i+=1) {
     count: JOBSIZE,
   });
 }
-
-// get the next job from the queue
-// given jobs go to the back of the queue in case the worker is slow or dies
-app.get('/job', getJob);
-app.post('/result', express.json(), postResult);
 
 function status() {
   process.stdout.write(`${done.length}/${JOBCOUNT} done          \r`);
@@ -60,7 +63,8 @@ function getJob(req, res) {
 function postResult(req, res) {
   const data = req.body;
   // search from the back because the recently given jobs are there
-  for (let i=jobs.length-1; i>=0; i-=1) {
+  let i;
+  for (i=jobs.length-1; i>=0; i-=1) {
     if (data.id === jobs[i].id) {
       // put the job in done, add the result, remove it from jobs
       done.push(jobs[i]);
@@ -69,6 +73,10 @@ function postResult(req, res) {
       status();
       break;
     }
+  }
+
+  if (i < 0) {
+    console.warn(`${new Date().toISOString()} unrecognized result:`, data);
   }
 
   // whether or not the job for the result was found, send the next job
