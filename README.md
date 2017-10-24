@@ -6,7 +6,7 @@ used to test cloud deployment tools.
 ## Installation
 
 ```
-git clone https://github.com/portsoc/clocoss-master-worker
+git clone https://github.com/up730418/clocoss-master-worker
 cd clocoss-master-worker
 npm install
 ```
