@@ -1,6 +1,6 @@
 'use strict';
 
-const secretKey = (process.argv[2] || '').trim();
+const secretKey = encodeURIComponent((process.argv[2] || '').trim());
 
 if (secretKey.length < 6) {
   console.error('Error: secret key too short');
