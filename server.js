@@ -103,3 +103,14 @@ const server = app.listen(port, () => {
   console.log(`Master listening on port ${port}!`);
   status();
 });
+
+server.on('error', (e) => {
+  switch (e.errno) { 
+    case 'EADDRINUSE' :
+      console.error(`server error: Port ${e.port} already in use`);
+      break;
+
+      default:
+        console.error(`Server error: ${e}`);
+  }
+});
