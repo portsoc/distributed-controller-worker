@@ -6,7 +6,11 @@
   "license": "ISC",
   "scripts": {
     "server": "node server.js",
-    "client": "node client.js"
+    "client": "node client.js",
+    "lint": "./node_modules/.bin/eslint ."
+  },
+  "engines": {
+    "node": ">=8.7.0"
   },
   "dependencies": {
     "express": "^4.16.2",

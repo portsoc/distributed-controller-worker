@@ -91,7 +91,7 @@ function finished() {
   let sum = 0;
   for (const job of done) {
     sum += job.result.sumsqrt;
-  }
+    }
   const time = Date.now() - startTime;
   console.log(`\nFinished: the sum of square roots of 0..${JOBCOUNT}*${JOBSIZE}-1 is ${sum} (took ${time}ms)`);
   process.exit(0);
