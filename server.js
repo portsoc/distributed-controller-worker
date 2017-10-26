@@ -105,12 +105,12 @@ const server = app.listen(port, () => {
 });
 
 server.on('error', (e) => {
-  switch (e.errno) { 
-    case 'EADDRINUSE' :
-      console.error(`server error: Port ${e.port} already in use`);
+  switch (e.errno) {
+    case 'EADDRINUSE':
+      console.error(`Server error: port ${e.port} already in use`);
       break;
 
-      default:
-        console.error(`Server error: ${e}`);
+    default:
+      console.error(`Server error: ${e}`);
   }
 });
