@@ -31,7 +31,7 @@ function checkSecretKey(req, res, next) {
 const jobs = [];
 const done = [];
 
-const JOBSIZE = 2e8;
+const JOBSIZE = 1e9;
 const JOBCOUNT = 100;
 
 // generate jobs
