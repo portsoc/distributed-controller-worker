@@ -1,5 +1,8 @@
 'use strict';
 
+const fetch = require('node-fetch');
+
+// setup
 const secretKey = encodeURIComponent((process.argv[2] || '').trim());
 
 if (secretKey.length < 6) {
@@ -17,8 +20,6 @@ if (serverIP.length < 1) {
 const jobUrl = `http://${serverIP}/job?key=${secretKey}`;
 const resultUrl = `http://${serverIP}/result?key=${secretKey}`;
 
-const fetch = require('node-fetch');
-
 const startTime = Date.now();
 let doneCount = 0;
 
@@ -28,8 +29,6 @@ async function getFirstJob() {
   job = await job.json();
   return doJob(job);
 }
-
-getFirstJob().catch((err) => { console.error('Error: ', err); });
 
 async function doJob(job) {
   switch (job.type) {
@@ -83,3 +82,11 @@ function finish(msg) {
   const time = Date.now() - startTime;
   console.log(`done ${doneCount} jobs in ${time}ms (${time/doneCount}ms per job).`);
 }
+
+async function start() {
+  getFirstJob().catch((err) => {
+    console.error('Error: ', err);
+  });
+}
+
+start();
