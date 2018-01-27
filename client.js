@@ -1,6 +1,8 @@
 'use strict';
 
 const fetch = require('node-fetch');
+const log = require('./logging')('clocoss-master-worker');
+
 
 // setup
 const secretKey = encodeURIComponent((process.argv[2] || '').trim());
@@ -44,6 +46,9 @@ async function sendResult(result) {
   doneCount += 1;
   try {
     let job = await fetch(resultUrl, { method: 'POST', body: JSON.stringify(result), headers });
+    if (job.ok) {
+      await log(`submitted job ${result.id}`);
+    }
     if (job.status === 204) return finish('no more jobs, done');
     if (!job.ok) throw new Error(`cannot post: ${job.status} ${job.statusText}`);
     job = await job.json();
@@ -84,6 +89,8 @@ function finish(msg) {
 }
 
 async function start() {
+  await log('starting');
+
   getFirstJob().catch((err) => {
     console.error('Error: ', err);
   });
