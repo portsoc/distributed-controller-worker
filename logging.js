@@ -1,6 +1,7 @@
 const address = require('address');
 const fetch = require('node-fetch');
-const logging = require('@google-cloud/logging')();
+const {Logging} = require('@google-cloud/logging');
+const logging = new Logging();
 
 const logMetadata = { resource: { type: 'global' } };
 
