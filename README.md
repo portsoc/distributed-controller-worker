@@ -1,4 +1,4 @@
-# CLOCOSS example: distributed computation
+# distributed master/worker computation example
 
 This is a simple master-worker distributed computation system example that can be
 used to test cloud deployment tools.
@@ -6,8 +6,8 @@ used to test cloud deployment tools.
 ## Installation
 
 ```
-git clone https://github.com/portsoc/clocoss-master-worker
-cd clocoss-master-worker
+git clone https://github.com/portsoc/distributed-master-worker
+cd distributed-master-worker
 npm install
 ```
 
