@@ -13,7 +13,7 @@
     "node": ">=8.7.0"
   },
   "dependencies": {
-    "@google-cloud/logging": "^5.5.0",
+    "@google-cloud/logging": "^8.0.9",
     "address": "^1.1.2",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1"
