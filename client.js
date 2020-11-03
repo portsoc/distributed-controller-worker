@@ -46,7 +46,7 @@ async function sendResult(result) {
   doneCount += 1;
   try {
     let job = await fetch(resultUrl, { method: 'POST', body: JSON.stringify(result), headers });
-    if (job.ok) log(`submitted job ${result.id}`);
+    if (job.ok) log(`worker submitted job ${result.id}`);
     if (job.status === 204) return finish('no more jobs, done');
     if (!job.ok) throw new Error(`cannot post: ${job.status} ${job.statusText}`);
     job = await job.json();
@@ -83,13 +83,13 @@ function doSumSqrt(job) {
 async function finish(msg) {
   console.log(msg);
   const time = Date.now() - startTime;
-  const finalMsg = `done ${doneCount} jobs in ${time}ms (${time / doneCount}ms per job).`;
+  const finalMsg = `worker done ${doneCount} jobs in ${time}ms (${time / doneCount}ms per job).`;
   console.log(finalMsg);
   await log(finalMsg);
 }
 
 async function start() {
-  await log('starting');
+  await log('worker starting');
 
   getFirstJob().catch((err) => {
     console.error('Error: ', err);
