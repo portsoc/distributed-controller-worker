@@ -32,7 +32,7 @@ async function getFirstJob() {
   return doJob(job);
 }
 
-async function doJob(job) {
+function doJob(job) {
   switch (job.type) {
     case 'sumsqrt': return sendResult(doSumSqrt(job));
     default: throw new Error(`unknown job type ${job.type}, bailing out`);
@@ -73,7 +73,7 @@ function doSumSqrt(job) {
   // console.time('job');
   let sumsqrt = 0;
   const end = job.start + job.count;
-  for (let i=job.start; i<end; i+=1) {
+  for (let i = job.start; i < end; i += 1) {
     sumsqrt += Math.sqrt(i);
   }
   // console.timeEnd('job');
@@ -83,7 +83,7 @@ function doSumSqrt(job) {
 async function finish(msg) {
   console.log(msg);
   const time = Date.now() - startTime;
-  const finalMsg = `done ${doneCount} jobs in ${time}ms (${time/doneCount}ms per job).`;
+  const finalMsg = `done ${doneCount} jobs in ${time}ms (${time / doneCount}ms per job).`;
   console.log(finalMsg);
   await log(finalMsg);
 }

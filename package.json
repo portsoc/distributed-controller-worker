@@ -17,5 +17,9 @@
     "address": "^1.1.2",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-portsoc": "^0.6.0"
   }
 }

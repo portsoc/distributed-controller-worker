@@ -35,7 +35,7 @@ const JOBSIZE = 5e8;
 const JOBCOUNT = 200;
 
 // generate jobs
-for (let i=0; i<JOBCOUNT; i+=1) {
+for (let i = 0; i < JOBCOUNT; i += 1) {
   jobs.push({
     id: i,
     type: 'sumsqrt',
@@ -67,7 +67,7 @@ function postResult(req, res) {
   const data = req.body;
   // search from the back because the recently given jobs are there
   let i;
-  for (i=jobs.length-1; i>=0; i-=1) {
+  for (i = jobs.length - 1; i >= 0; i -= 1) {
     if (data.id === jobs[i].id) {
       // put the job in done, add the result, remove it from jobs
       done.push(jobs[i]);
