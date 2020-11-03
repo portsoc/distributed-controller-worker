@@ -1,13 +1,13 @@
-# distributed master/worker computation example
+# distributed controller/worker computation example
 
-This is a simple master-worker distributed computation system example that can be
+This is a simple controller-worker distributed computation system example that can be
 used to test cloud deployment tools.
 
 ## Installation
 
 ```
-git clone https://github.com/portsoc/distributed-master-worker
-cd distributed-master-worker
+git clone https://github.com/portsoc/distributed-controller-worker
+cd distributed-controller-worker
 npm install
 ```
 

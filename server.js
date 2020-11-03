@@ -100,7 +100,7 @@ function finished() {
 const port = process.env.PORT || 80;
 
 const server = app.listen(port, () => {
-  console.log(`Master listening on port ${port}!`);
+  console.log(`Controller listening on port ${port}!`);
   status();
 });
 

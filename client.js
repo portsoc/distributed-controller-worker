@@ -1,7 +1,7 @@
 'use strict';
 
 const fetch = require('node-fetch');
-const log = require('./logging')('clocoss-master-worker');
+const log = require('./logging')('distributed-controller-worker');
 
 
 // setup

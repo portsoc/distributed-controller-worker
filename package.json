@@ -1,7 +1,7 @@
 {
-  "name": "clocoss-master-worker",
+  "name": "distributed-controller-worker",
   "version": "0.1.0",
-  "description": "a simple master-worker distributed computation example",
+  "description": "a simple controller-worker distributed computation example",
   "author": "Jacek Kopecky <jacek@jacek.cz>",
   "license": "ISC",
   "scripts": {
