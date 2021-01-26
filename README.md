@@ -3,6 +3,8 @@
 This is a simple controller-worker distributed computation system example that can be
 used to test cloud deployment tools.
 
+The client is CPU-intensive but single threaded, it requires one CPU to work best. The server is not CPU-intensive.
+
 ## Installation
 
 ```
